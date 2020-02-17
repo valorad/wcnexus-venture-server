@@ -1,0 +1,71 @@
+---
+
+openapi: "3.0.0"
+info:
+    title: wcnexus-venture-server
+    version: 1.0.0
+paths:
+    /api:
+        get:
+            operationId: rootAPI
+            summary: api root
+            description: api root
+            responses:
+                200:
+                    description: |-
+                        Check for 'API works' message
+                    content:
+                        application/json:
+                            schema: 
+                                $ref: '#/components/schemas/EntryMessage'
+                            examples:
+                                example0:
+                                    value:
+                                        message: "API works!"
+                                        OK: True
+                                        
+    /api/posts:
+        post:
+            operationId: updatePost
+            summary: sync post
+            description: sync post with repo
+            responses:
+                200:
+                    description: |-
+                        Give message on successful repo sync
+                    content:
+                        application/json:
+                            schema: 
+                                $ref: '#/components/schemas/UpdatePostMessage'
+                            examples:
+                                example0:
+                                    value:
+                                        message: "Successfully synced post"
+                                        OK: True
+                500:
+                    description: |-
+                        Give message on repo sync failure
+                    content:
+                        application/json:
+                            schema: 
+                                $ref: '#/components/schemas/UpdatePostMessage'
+                            examples:
+                                example0:
+                                    value:
+                                        message: "Failed to sync with posts repository"
+                                        OK: False
+
+components:
+  schemas:
+    EntryMessage:
+      properties:
+        OK:
+          type: boolean
+        message:
+          type: string
+    UpdatePostMessage:
+      properties:
+        OK:
+          type: boolean
+        message:
+          type: string
