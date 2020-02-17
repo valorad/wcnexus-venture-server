@@ -36,7 +36,7 @@ paths:
                     content:
                         application/json:
                             schema: 
-                                $ref: '#/components/schemas/UpdatePostMessage'
+                                $ref: '#/components/schemas/UpdateMessage'
                             examples:
                                 example0:
                                     value:
@@ -48,11 +48,42 @@ paths:
                     content:
                         application/json:
                             schema: 
-                                $ref: '#/components/schemas/UpdatePostMessage'
+                                $ref: '#/components/schemas/UpdateMessage'
                             examples:
                                 example0:
                                     value:
                                         message: "Failed to sync with posts repository"
+                                        OK: False
+
+    /api/themes:
+        post:
+            operationId: updateTheme
+            summary: update a theme
+            description: update a theme from github release
+            responses:
+                200:
+                    description: |-
+                        Give message on successful theme update
+                    content:
+                        application/json:
+                            schema: 
+                                $ref: '#/components/schemas/UpdateMessage'
+                            examples:
+                                example0:
+                                    value:
+                                        message: "Successfully updated the theme"
+                                        OK: True
+                500:
+                    description: |-
+                        Give message on theme update failure
+                    content:
+                        application/json:
+                            schema: 
+                                $ref: '#/components/schemas/UpdateMessage'
+                            examples:
+                                example0:
+                                    value:
+                                        message: "Failed to update the theme"
                                         OK: False
 
 components:
@@ -63,7 +94,7 @@ components:
           type: boolean
         message:
           type: string
-    UpdatePostMessage:
+    UpdateMessage:
       properties:
         OK:
           type: boolean
